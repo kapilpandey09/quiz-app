@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Win Prize Game</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR-GA4-ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'YOUR-GA4-ID');
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" alt="Headphones" class="product-image">
+            <h1>Win Prize Game</h1>
+            <div class="prize-info">Win Prize: 150 Points</div>
+        </div>
+        
+        <div class="game-container">
+            <div class="stats">
+                <div class="score">Total Points: <span id="score-value">0</span></div>
+                <div class="moves">Clicks: <span id="moves-value">0</span></div>
+            </div>
+            <div id="game-board" class="game-board">
+                <!-- Boxes will be added here by JavaScript -->
+            </div>
+            <button id="restart" class="btn">New Game</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
