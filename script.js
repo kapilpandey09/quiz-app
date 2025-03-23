@@ -4,6 +4,8 @@ const movesEl = document.getElementById('moves-value');
 const restartButton = document.getElementById('restart');
 const prizeInfoEl = document.querySelector('.prize-info');
 const productImageEl = document.querySelector('.product-image');
+const adPopup = document.getElementById('adPopup');
+const closePopup = document.querySelector('.close-popup');
 
 // Array of gadget images with working URLs
 const gadgetImages = [
@@ -135,34 +137,34 @@ function clickBox(box) {
 
     // Check if game is over
     if (clicks >= MAX_CLICKS) {
-        setTimeout(() => {
-            let message = '';
-            if (totalScore >= PRIZE_THRESHOLD) {
-                message = `🎉 Congratulations! You won the prize with ${totalScore} points! 🎉\nTarget was ${PRIZE_THRESHOLD} points`;
-                // Track game win event
-                gtag('event', 'game_win', {
-                    'event_category': 'gameplay',
-                    'event_label': 'game_win',
-                    'value': totalScore
-                });
-            } else {
-                message = `Game Over! You scored ${totalScore} points.\nTarget was ${PRIZE_THRESHOLD} points.\nTry again to win the prize!`;
-                // Track game lose event
-                gtag('event', 'game_lose', {
-                    'event_category': 'gameplay',
-                    'event_label': 'game_lose',
-                    'value': totalScore
-                });
-            }
-            alert(message);
-            // Disable all unclicked boxes
-            boxes.forEach(box => {
-                if (!box.classList.contains('clicked')) {
-                    box.style.cursor = 'not-allowed';
-                    box.style.opacity = '0.5';
-                }
+        // Track game result
+        if (totalScore >= PRIZE_THRESHOLD) {
+            prizeInfoEl.textContent = `🎉 Congratulations! You Won ${totalScore} Points! 🎉`;
+            prizeInfoEl.style.color = '#22c55e'; // Green color for win
+            // Track game win event
+            gtag('event', 'game_win', {
+                'event_category': 'gameplay',
+                'event_label': 'game_win',
+                'value': totalScore
             });
-        }, 500);
+        } else {
+            prizeInfoEl.textContent = `Game Over - Score: ${totalScore} Points`;
+            prizeInfoEl.style.color = '#ef4444'; // Red color for lose
+            // Track game lose event
+            gtag('event', 'game_lose', {
+                'event_category': 'gameplay',
+                'event_label': 'game_lose',
+                'value': totalScore
+            });
+        }
+        
+        // Disable all unclicked boxes
+        boxes.forEach(box => {
+            if (!box.classList.contains('clicked')) {
+                box.style.cursor = 'not-allowed';
+                box.style.opacity = '0.5';
+            }
+        });
     }
 }
 
@@ -184,6 +186,31 @@ restartButton.addEventListener('click', () => {
         'event_label': 'new_game'
     });
     createBoard();
+});
+
+// Popup Ad Functions
+function showAdPopup() {
+    adPopup.classList.add('show');
+    // Track ad popup view
+    gtag('event', 'ad_popup_view', {
+        'event_category': 'ads',
+        'event_label': 'popup_ad_shown'
+    });
+}
+
+function hideAdPopup() {
+    adPopup.classList.remove('show');
+}
+
+// Add click event to product image
+productImageEl.addEventListener('click', showAdPopup);
+closePopup.addEventListener('click', hideAdPopup);
+
+// Close popup when clicking outside
+window.addEventListener('click', (e) => {
+    if (e.target === adPopup) {
+        hideAdPopup();
+    }
 });
 
 // Start the game
