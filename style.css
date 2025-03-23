@@ -160,7 +160,39 @@ h1 {
     background: #764ba2;
 }
 
-/* Popup Ad Styles */
+/* AdSense Ad Styles */
+.adsbygoogle {
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+}
+
+/* Top Banner Ad */
+.ad-container {
+    width: 100%;
+    max-width: 728px;
+    margin: 20px auto;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* Side Ad */
+.side-ad-container {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 160px;
+    height: 600px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    display: none;
+}
+
+/* Popup Ad */
 .ad-popup {
     display: none;
     position: fixed;
@@ -183,6 +215,41 @@ h1 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.ad-space {
+    width: 100%;
+    min-height: 250px;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Responsive Design for Ads */
+@media (min-width: 1200px) {
+    .side-ad-container {
+        display: block;
+    }
+    
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+}
+
+/* Animation for popup */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.ad-popup.show {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Close button for popup */
 .close-popup {
     position: absolute;
     right: 10px;
@@ -198,23 +265,131 @@ h1 {
     color: #ff0000;
 }
 
-.ad-space {
+/* WPAdManager Ad Styles */
+.wpadmngr-ad {
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* Top Banner Ad */
+.wpadmngr-top {
     width: 100%;
-    min-height: 250px;
-    background: #f0f0f0;
+    max-width: 728px;
+    margin: 20px auto;
+}
+
+/* Side Ad */
+.wpadmngr-side {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 160px;
+    height: 600px;
+    display: none;
+}
+
+/* Popup Ad */
+.wpadmngr-popup {
+    /* पूरी स्क्रीन को कवर करता है */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+}
+
+.wpadmngr-popup-content {
+    position: relative;
+    margin: 5% auto;
+    width: 90%;
+    max-width: 800px;
+    background: white;
+    border-radius: 15px;
+}
+
+/* Video Ad Container */
+.wpadmngr-video-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    background: black;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.wpadmngr-video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Close Button */
+.wpadmngr-close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    width: 30px;
+    height: 30px;
+    background: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
+    transition: transform 0.3s ease;
 }
 
-/* Animation for popup */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+.wpadmngr-close:hover {
+    transform: scale(1.1);
 }
 
-.ad-popup.show {
+/* Animation */
+@keyframes popupFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.wpadmngr-popup.show {
     display: block;
-    animation: fadeIn 0.3s ease-in-out;
+    animation: popupFadeIn 0.3s ease-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .wpadmngr-popup-content {
+        margin: 10% auto;
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .wpadmngr-close {
+        right: 10px;
+        top: 5px;
+    }
+}
+
+/* Responsive Design */
+@media (min-width: 1200px) {
+    .wpadmngr-side {
+        display: block;
+    }
 }
